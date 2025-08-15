@@ -1,0 +1,54 @@
+{
+    "template": "<style media=\"screen\" type=\"text/css\">\n    .sonosbutton {\n        width: 100%;\n        padding: 5px;\n        border-radius: 0.5em;\n        border: 1;\n        color: white;\n        background-color: transparent;\n        font-size: 22px;\n        background-size: contain;\n        background-repeat: no-repeat;\n        background-position: center center;\n    }\n\n    .media_title {\n        font-size: 18px;\n        opacity: 1;\n        text-align: left;\n        text-transform: uppercase;\n        font-weight: normal;\n        z-index: 3;\n        background-color: transparent;\n        color: white;\n        letter-spacing: 2px;\n        white-space: nowrap;\n        overflow: hidden;\n        text-overflow: ellipsis;\n        padding-top: 0px;\n        padding-bottom: 0px\n    }\n\n    .media_artist {\n        font-size: 12px;\n        opacity: 1;\n        text-align: left;\n        text-transform: uppercase;\n        font-weight: normal;\n        z-index: 3;\n        background-color: transparent;\n        color: white;\n        letter-spacing: 2px;\n        white-space: nowrap;\n        overflow: hidden;\n        text-overflow: ellipsis;\n        padding-top: 0px;\n        padding-bottom: 10px\n    }\n\n    .media_fanart {\n        top: 0;\n        right: 0;\n        opacity: 1;\n        filter: grayscale(20%) brightness(70%);\n        z-index: 1;\n        outline: #fff solid 0px;\n        transition-duration: 3s;\n        box-shadow: 10 0 1px #ffffffbb, 0 0 2px #ffffffbb, 0 0 5px #ffffffbb, 0 0 10px #ccccccbb, 0 0 20px #ccccccbb, 0 0 22px #ccccccbb, 0 0 25px #ccccccbb, 0 0 33px #ccccccbb\n    }\n\n    .controller {\n        padding-left: 5px;\n        padding-right: 5px;\n        padding-top: 2px;\n        padding-bottom: 2px;\n        display: flex;\n        flex: 1;\n        flex-direction: row;\n        height: {{config.control_height}}px;\n        column-gap: 5%;\n    }\n\n    .track_controls {\n        border: 0px solid white;\n        border-collapse: collapse;\n        display: flex;\n        z-index: 0;\n        padding: 0px;\n        background-color: transparent;\n        flex: 1;\n        align-items: center;\n        justify-content: center;\n        column-gap: 5%;\n    }\n\n    .track_info {\n        flex: 8;\n        flex-direction: column;\n    }\n\n    .track_image {\n        flex: 2;\n    }\n\n    .sound_volume {\n        flex-direction: row;\n        display: flex;\n    }\n\n    .sonos-col-sm-1 {\n        border: 0px solid yellow;\n        border-collapse: collapse;\n        \"\n display: flex;\n        flex: 1;\n    }\n\n    .sonos-col-sm-2 {\n        border: 0px solid yellow;\n        border-collapse: collapse;\n        \"\n display: flex;\n        flex: 2;\n    }\n\n    .sonos-col-sm-3 {\n        border: 0px solid yellow;\n        border-collapse: collapse;\n        \"\n display: flex;\n        flex: 3;\n    }\n\n    .sonos-col-sm-4 {\n        border: 0px solid yellow;\n        border-collapse: collapse;\n        \"\n display: flex;\n        flex: 4;\n        column-gap: 2px;\n    }\n</style>\n<div class=\"controller\">\n    <div class=\"track_info\">\n        <div class=\"media_title\" ng-if=\"itemValue(config.media_title)!='UNDEF'\">\n            {{itemValue(config.media_title)}}&nbsp;&nbsp;\n        </div>\n        <div class=\"media_artist\" ng-if=\"itemValue(config.media_artist)!='UNDEF'\">\n            {{itemValue(config.media_artist)}}&nbsp;&nbsp;\n        </div>\n        <div class=\"track_controls\">\n            <div class=\"sonos-col-sm-1\" lass=\"col-sm-2 modgrid\">\n                <button class=\"sonosbutton\" style=\"background-image: url(/static/sonos/Back.png);\"\n                    ng-click=\"sendCmd(config.media_player, 'PREVIOUS')\">\n                    &lt;--\n                </button>\n            </div>\n\n            <div class=\"sonos-col-sm-2\" lass=\"col-sm-3 modgrid\" ng-if=\"itemValue(config.media_player) !='PLAY'\">\n                <button class=\"sonosbutton\" style=\"background-image: url(/static/sonos/Play.png);\"\n                    ng-click=\"sendCmd(config.media_player,'PLAY')\">\n                    |>\n                </button>\n            </div>\n            <div class=\"sonos-col-sm-2\" lass=\"col-sm-3 modgrid\" ng-if=\"itemValue(config.media_player) =='PLAY'\">\n                <button class=\"sonosbutton\" style=\"background-image: url(/static/sonos/Pause.png);\"\n                    ng-click=\"sendCmd(config.media_player,'PAUSE')\">\n                    ||\n                </button>\n            </div>\n\n            <div class=\"sonos-col-sm-1\" lass=\"col-sm-2 modgrid\">\n                <button class=\"sonosbutton\" style=\"background-image: url(/static/sonos/Fwd.png);\"\n                    ng-click=\"sendCmd(config.media_player, 'NEXT')\">\n                    --&gt;\n                </button>\n            </div>\n            <div class=\"sonos-col-sm-3 sound_volume\">\n                <button class=\"sonosbutton\"\n                    ng-click=\"sendCmd(config.media_volume, +itemState(config.media_volume) - 5)\">--</button>\n \n                <button class=\"sonosbutton\" ng-if=\"itemValue(config.media_mute) == 'OFF'\"\n                    ng-click=\"sendCmd(config.media_mute, 'ON')\">()</button>\n                <button class=\"sonosbutton\" ng-if=\"itemValue(config.media_mute) != 'OFF'\"\n                    ng-click=\"sendCmd(config.media_mute, 'OFF')\">)(</button>\n\n                <button class=\"sonosbutton\"\n                    ng-click=\"sendCmd(config.media_volume, +itemState(config.media_volume) + 5)\">++</button>\n            </div>\n        </div>\n    </div>\n\n\n    <div class=\"track_image\">\n        <img src=\"{{itemValue(config.media_art)}}\" class=\"media_fanart\" idth=\"100%\" height=\"100%\"\n            ng-if=\"itemValue(config.media_title)!='UNDEF'\" />\n    </div>\n</div>",
+    "name": "Sonos controller widget",
+    "author": "Peter Wojciechowski",
+    "description": "A Sonos controller and album art display",
+    "id": "Woj Sonos",
+    "settings": [
+        {
+            "id": "media_art",
+            "label": "Image Art",
+            "description": "Artwork for video or album covers for music can be shown here and will make up the background image of the widget.",
+            "default": "Sonos_Office_AlbumArt",
+            "type": "item"
+        },
+        {
+            "id": "media_player",
+            "label": "Player Control",
+            "description": "The media player we will send our strings to to control playback.",
+            "default": "Sonos_Office_Controller",
+            "type": "item"
+        },
+        {
+            "id": "media_title",
+            "label": "Title",
+            "description": "Movie title or song track or artist can be used here.",
+            "default": "Sonos_Office_CurrentTitle",
+            "type": "item"
+        },
+        {
+            "id": "media_artist",
+            "label": "Artist",
+            "default": "Sonos_Office_CurrentArtist",
+            "type": "item"
+        },
+        {
+            "id": "media_volume",
+            "label": "Volume",
+            "default": "Sonos_Office_Volume",
+            "type": "item"
+        },
+        {
+            "id": "media_mute",
+            "label": "Mute",
+            "default": "Sonos_Office_Mute",
+            "type": "item"
+        },
+        {
+            "id": "control_height",
+            "label": "Control height",
+            "default": 100,
+            "type": "number"
+        }
+    ]
+}
