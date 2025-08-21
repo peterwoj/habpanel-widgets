@@ -13,4 +13,7 @@ A dimmer widget that combines a slider for dimmer control and a switch for the w
 
 ## Screenshot
 
+* widget<br/>
 ![Dimmer widget](./dimmer.png)
+* config<br/>
+![Dimmer config](./dimmer_config.png)

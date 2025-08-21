@@ -29,5 +29,7 @@ String    Sonos_Office_AlbumArt          "Album picture: %s"    <text>          
    - Save the dashboard and run it
 
 ## Screenshot
-
+* widget<br/>
 ![Sonos widget](./sonos.png)
+* configuration<br/>
+![Sonos config](./sonos_config.png)
