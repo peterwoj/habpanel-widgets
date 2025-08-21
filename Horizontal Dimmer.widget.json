@@ -1,0 +1,53 @@
+{
+    "author": "Peter Wojciechowski",
+    "description": "Combo dimmer/switch control for easy on/off with dimmer items",
+    "id": "Horizontal Dimmer",
+    "name": "Horizontal dimmer/switch",
+    "template": "<style>\n  .miniIcon {\n  \tposition:absolute;\n  \ttop: 1%;\n  \tleft: 1%;\n  }\n  .switchBorder {\n    border: 2px solid var(--primary-color);\n  \tborder-radius: 25px;\n  padding: 5px;\n    margin: 0 auto;\n  }\n    \n  .table {\n   display: flex;\n   flex: 1;\n   flex-direction: column;\n  }\n  .tr {\n   display: flex;\n   flex: 1;\n   flex-direction: row;\n  }\n  .td {\n   display: flex;\n   flex-direction: column;\n  }\n</style>\n\n\n\n<div class=\"table\">\n  <div class=\"tr\" ng-if=\"!config.hide_name\">\n  <div class=\"td\" style=\"flex:7; padding-bottom: 10px; position-top: 2px;\">{{ngModel.name}}</div>  \n    </div>\n  <div style=\"z-index: -10;\">\n\n    <!--\n    <img class=\"miniIcon icon-tile colorize\"\n         ng-class=\"{off: itemValue(config.switch_item)==0}\"\n         ng-src=\"assets/icons/{{config.mini_iconset}}/{{config.mini}}.svg\" \n         style=\"width: {{(config.mini_size) ? config.mini_size : 32}}px;\" />\n\t\t-->\n    <widget-icon \n                 class=\"backdrop-icon-on\"\n                 ng-if=\"config.icon && config.show_icon\" \n                 iconset=\"config.icon_iconset\" \n                 icon=\"config.icon\"\n                 backdrop=\"true\"\n                 center=\"true\" \n                 state=\"itemValue(config.switch_item)\"\n                 style=\"position:absolute; top:0%; left: 0%;width:100%;height:100%;\"\n                 ></widget-icon>\n  </div>\n  <div class=\"tr\">\n    <div class=\"td\" ng-click=\"sendCmd(config.switch_item, (itemValue(config.switch_item) > 0) ? 'OFF' : 'ON')\">\n      <div class=\"switchBorder\" tyle=\"width: 40;\" tyle=\"width: {{((config.mini_size) ? config.mini_size : 32)*2}}px; height: {{((config.mini_size) ? config.mini_size : 32)*2}}px;\"\n           ng-init='onoff={\"sizeY\": config.mini_size, \"name\": \"OnOff\", \"item\": config.switch_item, \"hidelabel\": true, \"iconset\": (config.mini_iconset) ? config.mini_iconset : \"smarthome-set\", \"icon\": (config.mini) ? config.mini : \"bulb\", \"iconsize\": config.mini_size}'\n           >\n        <widget-switch ng-model=\"onoff\"></widget-switch>\n      </div>\n    </div>\n  <div class=\"tr\"\n       ng-init='dimmerModel={\"name\": \"dimmer\", \"item\": config.switch_item, \"hidelabel\": true, \"floor\": 0, \"ceil\": 100, \"step\": 1}'\n       >\n    <div class=\"td\" style=\"flex:6;\">\n    <widget-slider ng-model=\"dimmerModel\" />\n      </div>\n  </div>\n  <div>\n    <!--\n    <div>{{ngModel.name}}</div>\n    <div ng-class=\"{switchOn: itemValue(config.switch_item)>0}\">switchOn -&gt; {{ngModel.name}}: {{itemValue(config.switch_item)}}</div>\n    <div ng-class=\"{'switch-on': itemValue(config.switch_item)>0}\">switch-on -&gt; {{ngModel.name}}: {{itemValue(config.switch_item)}}</div>\n    <div ng-class=\"{'off colorize': itemValue(config.switch_item)>0}\">colorize -&gt; {{ngModel.name}}: {{itemValue(config.switch_item)}}</div>\n    <div ng-class=\"{'switch-glowing-on': itemValue(config.switch_item)>0}\">switch-glowing-on -&gt; {{ngModel.name}}: {{itemValue(config.switch_item)}}</div>\n\t\t-->\n  </div>\n    </div>\n</div>",
+    "settings": [
+        {
+            "description": "",
+            "id": "hide_name",
+            "label": "Hide item name",
+            "type": "checkbox"
+        },
+        {
+            "description": "Dimmer item to control",
+            "id": "switch_item",
+            "label": "Dimmer item",
+            "type": "item"
+        },
+        {
+            "default": true,
+            "description": "Should the icon be displayed?",
+            "id": "show_icon",
+            "label": "Show icon",
+            "type": "checkbox"
+        },
+        {
+            "description": "Background item to display",
+            "id": "icon",
+            "label": "Icon",
+            "type": "icon"
+        },
+        {
+            "default": true,
+            "id": "show_mini",
+            "label": "Show mini icon",
+            "type": "checkbox"
+        },
+        {
+            "description": "Mini icon to show",
+            "id": "mini",
+            "label": "Mini icon",
+            "type": "icon"
+        },
+        {
+            "default": "32",
+            "description": "Size of the mini icon (default: 32)",
+            "id": "mini_size",
+            "label": "Mini icon size",
+            "type": "number"
+        }
+    ]
+}
